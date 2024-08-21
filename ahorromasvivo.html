@@ -101,157 +101,159 @@
     </div>
 
     <script>
-        // Data from the Excel file
-        const data = {
-            investment: [4924.84, 1875.20, 1485.22, 553.00, 2691.83],
-            reach: [5157895, 518856, 583217, 105716, 0],
-            impressions: [18755140, 1601705, 3089879, 2312671, 421440],
-            clicks: [14998, 87215, 20277, 8237, 132]
-        };
+        window.onload = function() {
+            // Data from the Excel file
+            const data = {
+                investment: [4924.84, 1875.20, 1485.22, 553.00, 2691.83],
+                reach: [5157895, 518856, 583217, 105716, 0],
+                impressions: [18755140, 1601705, 3089879, 2312671, 421440],
+                clicks: [14998, 87215, 20277, 8237, 132]
+            };
 
-        // Calculate totals
-        const totalInvestment = data.investment.reduce((a, b) => a + b, 0);
-        const totalReach = data.reach.reduce((a, b) => a + b, 0);
-        const totalImpressions = data.impressions.reduce((a, b) => a + b, 0);
-        const totalClicks = data.clicks.reduce((a, b) => a + b, 0);
+            // Calculate totals
+            const totalInvestment = data.investment.reduce((a, b) => a + b, 0);
+            const totalReach = data.reach.reduce((a, b) => a + b, 0);
+            const totalImpressions = data.impressions.reduce((a, b) => a + b, 0);
+            const totalClicks = data.clicks.reduce((a, b) => a + b, 0);
 
-        // Update scorecards
-        document.getElementById('totalInvestment').textContent = totalInvestment.toFixed(2);
-        document.getElementById('totalReach').textContent = totalReach.toLocaleString();
-        document.getElementById('totalImpressions').textContent = totalImpressions.toLocaleString();
-        document.getElementById('totalClicks').textContent = totalClicks.toLocaleString();
+            // Update scorecards
+            document.getElementById('totalInvestment').textContent = totalInvestment.toFixed(2);
+            document.getElementById('totalReach').textContent = totalReach.toLocaleString();
+            document.getElementById('totalImpressions').textContent = totalImpressions.toLocaleString();
+            document.getElementById('totalClicks').textContent = totalClicks.toLocaleString();
 
-        // Total Investment by Media Channel (Bar Chart)
-        var ctx1 = document.getElementById('investmentByChannel').getContext('2d');
-        var investmentByChannel = new Chart(ctx1, {
-            type: 'bar',
-            data: {
-                labels: ['Meta', 'YouTube', 'Google Ads', 'X', 'Spotify'],
-                datasets: [{
-                    label: 'Total Investment (L)',
-                    data: data.investment,
-                    backgroundColor: 'rgba(54, 162, 235, 0.6)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        title: {
-                            display: true,
-                            text: 'Investment (L)'
+            // Total Investment by Media Channel (Bar Chart)
+            var ctx1 = document.getElementById('investmentByChannel').getContext('2d');
+            var investmentByChannel = new Chart(ctx1, {
+                type: 'bar',
+                data: {
+                    labels: ['Meta', 'YouTube', 'Google Ads', 'X', 'Spotify'],
+                    datasets: [{
+                        label: 'Total Investment ($)',
+                        data: data.investment,
+                        backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Investment ($)'
+                            }
                         }
                     }
                 }
-            }
-        });
+            });
 
-        // Reach vs. Investment by Media Channel (Bubble Chart)
-        var ctx2 = document.getElementById('reachVsInvestment').getContext('2d');
-        var reachVsInvestment = new Chart(ctx2, {
-            type: 'bubble',
-            data: {
-                datasets: [{
-                    label: 'Meta',
-                    data: [{x: data.investment[0], y: data.reach[0], r: 30}],
-                    backgroundColor: 'rgba(255, 99, 132, 0.6)'
-                },
-                {
-                    label: 'YouTube',
-                    data: [{x: data.investment[1], y: data.reach[1], r: 10}],
-                    backgroundColor: 'rgba(54, 162, 235, 0.6)'
-                },
-                {
-                    label: 'Google Ads',
-                    data: [{x: data.investment[2], y: data.reach[2], r: 10}],
-                    backgroundColor: 'rgba(75, 192, 192, 0.6)'
-                },
-                {
-                    label: 'X',
-                    data: [{x: data.investment[3], y: data.reach[3], r: 10}],
-                    backgroundColor: 'rgba(153, 102, 255, 0.6)'
-                },
-                {
-                    label: 'Spotify',
-                    data: [{x: data.investment[4], y: data.reach[4], r: 10}],
-                    backgroundColor: 'rgba(255, 206, 86, 0.6)'
-                }]
-            },
-            options: {
-                scales: {
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'Investment (L)'
-                        },
-                        beginAtZero: true
+            // Reach vs. Investment by Media Channel (Bubble Chart)
+            var ctx2 = document.getElementById('reachVsInvestment').getContext('2d');
+            var reachVsInvestment = new Chart(ctx2, {
+                type: 'bubble',
+                data: {
+                    datasets: [{
+                        label: 'Meta',
+                        data: [{x: data.investment[0], y: data.reach[0], r: 30}],
+                        backgroundColor: 'rgba(255, 99, 132, 0.6)'
                     },
-                    y: {
-                        title: {
-                            display: true,
-                            text: 'Reach'
+                    {
+                        label: 'YouTube',
+                        data: [{x: data.investment[1], y: data.reach[1], r: 10}],
+                        backgroundColor: 'rgba(54, 162, 235, 0.6)'
+                    },
+                    {
+                        label: 'Google Ads',
+                        data: [{x: data.investment[2], y: data.reach[2], r: 10}],
+                        backgroundColor: 'rgba(75, 192, 192, 0.6)'
+                    },
+                    {
+                        label: 'X',
+                        data: [{x: data.investment[3], y: data.reach[3], r: 10}],
+                        backgroundColor: 'rgba(153, 102, 255, 0.6)'
+                    },
+                    {
+                        label: 'Spotify',
+                        data: [{x: data.investment[4], y: data.reach[4], r: 10}],
+                        backgroundColor: 'rgba(255, 206, 86, 0.6)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Investment ($)'
+                            },
+                            beginAtZero: true
                         },
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-
-        // Engagement Rate by Media Channel (Bar Chart)
-        var ctx3 = document.getElementById('engagementRate').getContext('2d');
-        var engagementRate = new Chart(ctx3, {
-            type: 'bar',
-            data: {
-                labels: ['Meta', 'YouTube', 'Google Ads', 'X', 'Spotify'],
-                datasets: [{
-                    label: 'Engagement Rate (%)',
-                    data: [5.6, 4.2, 6.7, 8.2, 7.1], // Replace with actual data
-                    backgroundColor: 'rgba(255, 206, 86, 0.6)',
-                    borderColor: 'rgba(255, 206, 86, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        title: {
-                            display: true,
-                            text: 'Engagement Rate (%)'
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Reach'
+                            },
+                            beginAtZero: true
                         }
                     }
                 }
-            }
-        });
+            });
 
-        // Cost per Thousand Impressions (CPM) by Media Channel (Bar Chart)
-        var ctx4 = document.getElementById('cpmByChannel').getContext('2d');
-        var cpmByChannel = new Chart(ctx4, {
-            type: 'bar',
-            data: {
-                labels: ['Meta', 'YouTube', 'Google Ads', 'X', 'Spotify'],
-                datasets: [{
-                    label: 'CPM (L)',
-                    data: [0.27, 1.725, 7.41, 0.32, 6.39],
-                    backgroundColor: 'rgba(153, 102, 255, 0.6)',
-                    borderColor: 'rgba(153, 102, 255, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        title: {
-                            display: true,
-                            text: 'CPM (L)'
+            // Engagement Rate by Media Channel (Bar Chart)
+            var ctx3 = document.getElementById('engagementRate').getContext('2d');
+            var engagementRate = new Chart(ctx3, {
+                type: 'bar',
+                data: {
+                    labels: ['Meta', 'YouTube', 'Google Ads', 'X', 'Spotify'],
+                    datasets: [{
+                        label: 'Engagement Rate (%)',
+                        data: [5.6, 4.2, 6.7, 8.2, 7.1], // Replace with actual data
+                        backgroundColor: 'rgba(255, 206, 86, 0.6)',
+                        borderColor: 'rgba(255, 206, 86, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Engagement Rate (%)'
+                            }
                         }
                     }
                 }
-            }
-        });
+            });
+
+            // Cost per Thousand Impressions (CPM) by Media Channel (Bar Chart)
+            var ctx4 = document.getElementById('cpmByChannel').getContext('2d');
+            var cpmByChannel = new Chart(ctx4, {
+                type: 'bar',
+                data: {
+                    labels: ['Meta', 'YouTube', 'Google Ads', 'X', 'Spotify'],
+                    datasets: [{
+                        label: 'CPM ($)',
+                        data: [0.27, 1.725, 7.41, 0.32, 6.39],
+                        backgroundColor: 'rgba(153, 102, 255, 0.6)',
+                        borderColor: 'rgba(153, 102, 255, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'CPM ($)'
+                            }
+                        }
+                    }
+                }
+            });
+        };
     </script>
 
 </body>
